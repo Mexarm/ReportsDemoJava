@@ -1,15 +1,12 @@
 package com.RestAssuredTest.RATest;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
 
 import org.hamcrest.CoreMatchers;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.matchers.JUnitMatchers;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -34,7 +31,7 @@ public class SeleniumTest {
 
 	@Test
 	public void whenCorrectUsernameAndPasswordAreProvided_thenLoginSucceededMessageIsReceived() {
-		
+
 		browser.navigate().to("http://the-internet.herokuapp.com/login");
 		WebElement username = browser.findElement(By.id("username"));
 		WebElement password = browser.findElement(By.id("password"));
@@ -43,8 +40,8 @@ public class SeleniumTest {
 		password.sendKeys("SuperSecretPassword!");
 		loginButton.click();
 		WebElement flash = browser.findElement(By.xpath("//div[@id=\"flash\"]"));
-		
-		assertThat(flash.getText(),CoreMatchers.containsString("You logged into a secure area"));
+
+		assertThat(flash.getText(), CoreMatchers.containsString("You logged into a secure area"));
 
 	}
 
