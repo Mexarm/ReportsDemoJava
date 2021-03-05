@@ -19,7 +19,7 @@ public class SeleniumTest {
 
 	private static WebDriver browser;
 	@Rule
-	public EReport eReport = new EReport(System.getProperty("user.dir") + "\\target\\ExtentReportResultsSelenium.html");
+	public EReport eReport = new EReport(System.getProperty("user.dir") + "\\target\\ExtentReportResultsSelenium.html", browser);
 
 	@BeforeClass
 	public static void setUp() {
@@ -41,7 +41,7 @@ public class SeleniumTest {
 		loginButton.click();
 		WebElement flash = browser.findElement(By.xpath("//div[@id=\"flash\"]"));
 
-		assertThat(flash.getText(), CoreMatchers.containsString("You logged into a secure area"));
+		assertThat(flash.getText(), CoreMatchers.containsString("FAIL! You logged into a secure area"));
 
 	}
 

@@ -4,6 +4,7 @@ import java.io.File;
 
 import org.junit.rules.TestWatcher;
 import org.junit.runner.Description;
+import org.openqa.selenium.WebDriver;
 
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
@@ -11,10 +12,15 @@ import com.relevantcodes.extentreports.LogStatus;
 
 public class EReport extends TestWatcher {
 	private String rptFilename;
+	private WebDriver browser = null;
 
 	public EReport(String rptFilename) {
 		this.rptFilename = rptFilename;
+	}
 
+	public EReport(String rptFilename, WebDriver browser) {
+		this.rptFilename = rptFilename;
+		this.browser = browser;
 	}
 
 	@Override
@@ -22,8 +28,13 @@ public class EReport extends TestWatcher {
 		ExtentReports extent = createReport();
 		ExtentTest test = extent.startTest(description.getDisplayName(), "Test failed, click here for further details");
 
+		if (browser != null) {
+			// take a screenshot
+			System.out.println("saving screenshot...");
+		}
 		// step log
 		test.log(LogStatus.FAIL, "Failure: " + e.toString());
+
 		flushReports(extent, test);
 	}
 
