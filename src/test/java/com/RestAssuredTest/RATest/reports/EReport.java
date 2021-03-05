@@ -1,5 +1,7 @@
 package com.RestAssuredTest.RATest.reports;
 
+import java.io.File;
+
 import org.junit.rules.TestWatcher;
 import org.junit.runner.Description;
 
@@ -9,9 +11,11 @@ import com.relevantcodes.extentreports.LogStatus;
 
 public class EReport extends TestWatcher {
 	private String rptFilename;
+	
 
 	public EReport(String rptFilename) {
 		this.rptFilename = rptFilename;
+		
 	}
 
 	@Override
@@ -34,12 +38,18 @@ public class EReport extends TestWatcher {
 		flushReports(extent, test);
 	}
 
-	@SuppressWarnings("deprecation")
+
 	private ExtentReports createReport() {
-		ExtentReports extent = new ExtentReports(rptFilename, false);
-		extent.config().reportName("My first extentReport report");
-		extent.config().reportHeadline("See my awesome passed tests!");
-		return extent;
+		
+	ExtentReports extent = new ExtentReports(this.rptFilename, false);
+	extent
+    .addSystemInfo("Host Name", "SoftwareTestingMaterial")
+    .addSystemInfo("Environment", "Automation Testing")
+    .addSystemInfo("User Name", "SDET Batch 1 - Reporting Team");
+   
+    extent.loadConfig(new File(System.getProperty("user.dir")+"\\extent-config.xml"));
+	
+	return extent;
 	}
 
 	private void flushReports(ExtentReports extent, ExtentTest test) {

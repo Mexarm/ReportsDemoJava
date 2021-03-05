@@ -16,7 +16,7 @@ import org.json.JSONObject;
 public class FwReportingTest {
 
 	@Rule
-	public EReport name = new EReport(System.getProperty("user.dir") + "\\target\\ExtentReportResults.html");
+	public EReport eReport = new EReport(System.getProperty("user.dir") + "\\target\\ExtentReportResults.html");
 
 	@BeforeClass
 	public static void classSetup() {
